@@ -44,7 +44,7 @@
                 disabled ={flipped === false}/>    
             </div>
             <button onClick = {onClick}>reset</button>
-            <button onClick = {onFlip}>Flip</button>
+            <button onClick = {onFlip}>{flipped? "Turn Back" : "Invert" }</button>
         </div>
         )
     };
