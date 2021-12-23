@@ -6,15 +6,15 @@ function App() {
   const [coins, setCoins] = useState([]);
   const [myMoney, setMymoney] = useState("");
   const [money, setMoney] = useState(0);
+  const [value, setValue] = useState("");
   const onChange = (event) => setMymoney(event.target.value);
+  const onSelectChange = (event) => setValue(event.target.value)
   const onSubmit = (event) => {
     event.preventDefault();
     if(myMoney === 0){
       return ;
     }
-    //console.log(myMoney);
-    setMoney((currentMoney) => (parseInt(myMoney)));
-    //console.log(money);
+    setMoney((currentMoney) => ((myMoney === "") ? null :  parseInt(myMoney)));
     setMymoney("");
   }
   useEffect(() => {
@@ -28,7 +28,7 @@ function App() {
 
   return (
    <div>
-     <h1>The Coins! {loading ? null : `(${coins.length})`}</h1>
+     <h1>The Coins! {loading ? null : `(total: ${coins.length})`}</h1>
      {loading ? <strong>Loading...</strong> :
       <form onSubmit={onSubmit}>
       <div>
@@ -40,12 +40,13 @@ function App() {
         </input>
         <button>Confirm</button>
         <br></br>
-        <h3>Available coins (Selected Coin) : {money} ()</h3>
+        {(money !== 0 && money != null && value !=="defaultValue" && value!== "") ? 
+        <h3>Available to buy coins (Selected Coin) : {money} ({value})</h3> : null}
         <br></br>
-        <select>
+        <select onChange={onSelectChange}>
           <option value="defaultValue">select the coin</option>
         {coins.map((coin) => 
-            <option key={coin.id}>
+            <option value = {coin.symbol} key={coin.id}>
               {coin.name} ({coin.symbol}) : ${coin.quotes.USD.price} USD
             </option>
         )}
