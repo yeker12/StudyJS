@@ -8,27 +8,29 @@
         <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
         <script type="text/babel">
             const root = document.querySelector("#root");
-            function Btn ({buttonName, sizeBig}) {
-                console.log(sizeBig)
+            function Btn ({buttonName, sizeBig, onClick}) {
+                console.log(buttonName, "is rendered!")
                 return(
                     
-                    <button style={{
+                    <button onClick = {onClick} 
+                        style={{
                         backgroundColor: "skyblue",
                         color: "white",
                         padding: "10px 20px",
                         border: 0,
                         borderRadius: 10,
-                        fontSize: sizeBig ? 20 : 12
-                        
+                        fontSize: sizeBig ? 16 : 12
                     }}>{buttonName}</button>
                 )
             };   
+            const MemorizedButton = React.memo(Btn);
             function App() {
-
+                const [btnText, SetBtnText] = React.useState("Confirm");
+                const onChangeBtnText = () => SetBtnText("Completed")
                 return (
                     <div>
-                    <Btn buttonName="Confirm" sizeBig={true}/>
-                    <Btn buttonName="Cancel" sizeBig={false}/>
+                    <MemorizedButton buttonName={btnText} sizeBig={true} onClick={onChangeBtnText}/>
+                    <MemorizedButton buttonName="Cancel" sizeBig={false}/>
                     </div>
                 )
             }
