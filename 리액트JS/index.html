@@ -8,18 +8,76 @@
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
         const root = document.querySelector("#root");
-        function App() {
-            const [counter, setCounter] = React.useState(0);
-            const onClick = () => (
-                setCounter((current) => current + 1)
-            )
+        function TimeConverter() {
+           const [amount, setAmount] = React.useState();
+           const [flip, setFlip] = React.useState(false);
+           const onChange = (event) => {
+            setAmount(event.target.value)
+           };
+           const onReset = () => (setAmount(0));
+           const onFlip = () => {
+                onReset();
+                setFlip((current) => !current);
+           };
             return (
             <div>
-                <h3>Total click: {counter}</h3>
-                <button onClick={onClick}>click me</button>
+                <label htmlFor="minutes">Minutes</label>
+                <input id="minutes" placeholder="Minutes" type="number" value={flip? amount * 60 : amount}
+                onChange = {onChange} disabled = {flip}></input>
+                <p>
+                <label htmlFor="hours">Hours</label>
+                <input id="hours" placeholder="Hours" type="number" value={flip? amount : Math.round(amount/60)}
+                onChange = {onChange} disabled = {!flip}></input>
+                </p>
+                <button onClick={onReset}>Reset</button>
+                <button onClick={onFlip}>{flip? "Turn Back" : "Flip"}</button>
             </div>
             )
         }
+       function DistanceConverter () {
+        const [amount, setAmount] = React.useState();
+        const [flip, setFlip] = React.useState(false);
+        const onChange = (event) => (setAmount(event.target.value))
+        const onReset = () => setAmount(0)
+        const onFlip = () => {
+            onReset()
+            setFlip((current) => !current)
+        };
+        return (
+        <div>
+            <label htmlFor="km">kilometers</label>
+            <input id="km" placeholder="kilometers" type="number" onChange={onChange} 
+            value={flip? amount * 1.609 : amount} disabled={flip}></input>
+            <p>
+            <label htmlFor="mile">Miles</label>
+            <input id="mile" placeholder="miles" type="number" onChange={onChange}
+            value={flip ? amount : Math.round(amount / 1.609)} disabled={!flip}></input>
+            </p>
+            <button onClick={onReset}>Reset</button>
+            <button onClick={onFlip}>{flip ? "Turn Back" : "Flip"}</button>
+
+        </div>
+        );
+       }
+        function App() {
+            const [select, setSelect] = React.useState("-1")
+            const onSelect = (event) => setSelect(event.target.value)
+            return (
+            <div>
+                <h2>Super Converter</h2>
+                <select onChange={onSelect}>
+                    <option value = "-1">Select your Converter</option>
+                    <option value = "0">Time Converter (minute and hour)</option>
+                    <option value = "1">Distance Converter (kilometer and mile)</option>
+                </select>
+                <hr></hr>
+                {select === "-1" ? "please select the converter" : null}
+                {select === "0" ? <TimeConverter /> : null}
+                {select === "1" ? <DistanceConverter /> : null}
+            </div>
+            )
+        }
+        
         ReactDOM.render(<App/>, root)
     </script>
 </html>
