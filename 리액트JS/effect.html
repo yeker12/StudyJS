@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <div id="root"></div>
+    </body>
+        <script src="https://unpkg.com/react@17.0.2/umd/react.development.js"></script>
+        <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+        <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+        <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+        <script type="text/babel">
+            const root = document.querySelector("#root");
+            function Show() {
+                React.useEffect( () => {
+                    console.log("Hello!! :)")
+                    return () => {
+                        console.log("Bye Bye :(")
+                    }
+                }, [])
+                return(
+                    <div>
+                        <h4>Hello!!! I am here!</h4>
+                    </div>
+                )
+            }
+            function App() {
+                const [counter, setCounter] = React.useState(0)
+                const [keyword, setKeyword] = React.useState("")
+                const [show, setShow] = React.useState(false)
+                const onClick = () => setCounter((current) => current + 1)
+                const onChange = (event) => setKeyword(event.target.value)
+                const onShow = () => setShow((current) => !current)
+                React.useEffect(() =>{
+                    console.log("call the API")
+                }, [])
+                React.useEffect( () => {
+                    if(keyword !== "" && keyword.length > 5) {
+                        console.log("search for", keyword)
+                    }
+                }, [keyword])
+                return (
+                    <div>
+                        <input type="text" placeholder="wirte a word for search" onChange={onChange}></input>
+                        <h3>{counter}</h3>
+                        <button onClick={onClick}>click me</button>
+                        <p>
+                        <button onClick={onShow}>{show ? "Hide" : "Show"}</button>
+                        {show ? <Show /> : null}
+                        </p>
+                    </div>
+                )
+            }
+            ReactDOM.render(<App/>, root)
+        </script>
+</html>
