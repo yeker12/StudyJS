@@ -1,5 +1,5 @@
 # Studying JavaScript
-=============
+
 
 **1. VanillaJS_Assignment**
 : 노마드코더 바닐라JS 챌린지 과제 모음
