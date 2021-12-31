@@ -1,9 +1,9 @@
-#Studying JavaScript
+# Studying JavaScript
 =============
 
 **1. VanillaJS_Assignment**
 : 노마드코더 바닐라JS 챌린지 과제 모음
-(This is the challenge assignments of Vanilla JS in nodadecoder)
+(This is the challenge assignments of Vanilla JS in nomadcoder)
 
 **2. my_react**
 : 안 쓰는 폴더 / 초기에 사용했으나 현재 사용 안함
