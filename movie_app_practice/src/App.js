@@ -21,6 +21,8 @@ function App() {
           <div>
           <img src={movie.medium_cover_image}/>
           </div>
+          <p>Movie rating: {movie.rating}</p>
+          <p>Year: {movie.year}</p>
           <p>{movie.summary}</p>
          </div>)}
       </div>)}
