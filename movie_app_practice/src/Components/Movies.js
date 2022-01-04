@@ -15,7 +15,6 @@ function Movies ( {id, title, coverImg, rate, year, summary, genres }) {
             <ul> 
                 {genres && genres.map( (g) => <li key={g}>{g}</li>)}
             </ul>
-            <p>{summary}</p>
          </div>
     );
 }
