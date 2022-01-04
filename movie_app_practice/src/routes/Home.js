@@ -17,6 +17,7 @@ function Home() {
     <div>
       {loading ? <h3>LOADING...</h3> : <div>{movies.map( (movie) => <Movies 
       key={movie.id}
+      id={movie.id}
       title={movie.title}
       coverImg={movie.medium_cover_image}
       rate={movie.rating}
