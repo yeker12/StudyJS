@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import  Movies from "./Components/Movies";
+import  Movies from "../Components/Movies";
+
 
 function Home() {
     const [loading, setLoading] = useState(true);
@@ -12,7 +13,6 @@ function Home() {
       setLoading(false);
     })
   }, []);
-  console.log(movies);
   return (
     <div>
       {loading ? <h3>LOADING...</h3> : <div>{movies.map( (movie) => <Movies 
@@ -21,6 +21,7 @@ function Home() {
       coverImg={movie.medium_cover_image}
       rate={movie.rating}
       year={movie.year}
+      genres={movie.genres}
       summary={movie.summary}  /> )}</div>}
     </div>
     );
